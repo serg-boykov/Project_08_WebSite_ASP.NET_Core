@@ -62,8 +62,19 @@ namespace MyCompany
                 option.SlidingExpiration = true;
             });
 
-            // Добавляем поддержку контроллеров и представлений (MVC)
-            services.AddControllersWithViews()
+            // Настраиваем политику авторизации для Admin area.
+            services.AddAuthorization(x =>
+            {
+                // В политике "AdminArea" требуем от пользователя роль "admin".
+                x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
+            });
+
+            // Добавляем сервисы для контроллеров и представлений (MVC)
+            services.AddControllersWithViews(x =>
+                {
+                    // Добавляем в Соглашение область "Admin" с политикой "AdminArea", которую определили выше.
+                    x.Conventions.Add(new AdminAreaAuthorization("Admin" , "AdminArea"));
+                })
                 // выставляем совместимость с asp.net core 3.0,
                 // чтобы быть уверенными, что при обновлении ничего не сломалось.
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
@@ -98,6 +109,7 @@ namespace MyCompany
             // Регистрируем нужные нам маршруты (Endpoints)
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
