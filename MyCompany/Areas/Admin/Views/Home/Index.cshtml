@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IQueryable<ServiceItem>
 @{
+    string strTitle = "Панель адмиристратора";
+    ViewBag.Title = strTitle;
 }
+
+<div>
+    <h2>@strTitle</h2>
+    
+    @*Блок "Наши услуги"*@
+    <div>
+        <h3>Наши услуги</h3>
+        
+        <div class="div-box">
+            @*Ссылка на контроллер "ServiceItems" с дейтсвием "Edit"*@
+            <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить услугу</a>
+        </div>
+        
+        @*Если в модели Model присутствует хотя бы один элемент,
+        то в цикле foreach перечисляем все услуги, которые будут на сайте.*@
+        @if (Model.Any())
+        {
+            <div>
+                @foreach (ServiceItem entity in Model)
+                {
+                    <div>
+                        <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.Id">редактировать</a>
+                        |
+                        <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.Id">
+                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">удалить</a>
+                        </form>
+                        |
+                        <a asp-area="" asp-controller="ServiceItems" asp-action="Index" asp-route-id="@entity.Id">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    @*Блок "Редактировать страницы нашего сайта".*@
+    <div class="div-box">
+        <h3>Редактировать страницы сайта</h3>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услуги</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
+    </div>
+
+    @*Форма для выхода из сеанса до ухода с сайта.*@
+    <div class="div-box">
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+            <input type="submit" value="Выйти" />
+        </form>
+    </div>
+</div>

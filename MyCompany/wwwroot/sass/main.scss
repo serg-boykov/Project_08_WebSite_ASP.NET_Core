@@ -797,10 +797,22 @@
 
 	}
 
+	/*Для более правильного отображения элементов в представлении*/
 	.div-box {
 		padding: 15px 0;
 
 		label {
 			display: block;
 		}
+
+		a {
+			display: block;
+		}
+	}
+
+	/*Для правильного отображения картинки услуги на сайте.*/
+	.img-block {
+		display: block;
+		max-width: 100%;
+		margin:0 auto;
 	}
