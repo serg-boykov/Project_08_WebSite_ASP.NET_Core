@@ -1,0 +1,32 @@
+﻿@model IQueryable<ServiceItem>
+
+@if (Model?.Any() == true){
+
+    <section>
+        <h2>Our services</h2>
+
+        @*В ненумерованном списке выводим список наших услуг.*@
+        <ul class="small-image-list">
+            @foreach (ServiceItem entity in Model)
+            {
+                <li>
+                    <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                        
+                        @*Кликабельная титульная картинка нашей услуги.*@
+                        <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
+                    </a>
+
+                    <h4>
+                        @*Название услуги.*@
+                        @entity.Title
+                    </h4>
+
+                    <p>
+                        @*Краткое описание услуги.*@
+                        @entity.Subtitle
+                    </p>
+                </li>
+            }
+        </ul>
+    </section>
+}
