@@ -1,9 +1,28 @@
-﻿@model TextField
+﻿@*В качестве модели одна услуга.*@
+@model ServiceItem
 @{
+    //Заполняем все мега-теги из Model
     ViewBag.Title = Model.MetaTitle;
     ViewBag.Description = Model.MetaDescription;
     ViewBag.Keywords = Model.MetaKeywords;
 }
+
+<div>
+    <h2>
+        @*Название услуги.*@
+        @Model.Title
+    </h2>
+
+    <h2>
+        @*Краткое описание услуги.*@
+        @Model.Subtitle
+    </h2>
+
+    <div>
+        @*Титульная картинка услуги.*@
+        <img class="img-block" src="~/images/@Model.TitleImagePath" />
+    </div>
+</div>
 
 <div>
     @*Вывод содержимого свойства Text в том виде как есть при помощи метода Raw().

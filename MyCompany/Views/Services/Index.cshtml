@@ -1,0 +1,41 @@
+﻿@*В качестве модели коллекция услуг.*@
+@model IQueryable<ServiceItem>
+@{
+    //Извлекаем TextField из ViewBag
+    TextField textField = ViewBag.TextField;
+
+    //Заполняем все мега-теги
+    ViewBag.Title = textField.MetaTitle;
+    ViewBag.Description = textField.MetaDescription;
+    ViewBag.Keywords = textField.MetaKeywords;
+}
+
+<div>
+    @*Если модель содержит какие-то данные, в данном случае список услуг*@
+    @if (Model.Any())
+    {
+        @*Используем стиль из этого шаблона.*@
+        <ul class="big-image-list">
+            
+            @foreach (ServiceItem entity in Model)
+            {
+                @*Для каждой услуги делаем отдельный <li> элемент*@
+                <li>
+                    
+                    @*Ссылка на конкретную услугу.*@
+                    <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                        
+                        @*Кликабельная титульная картинка.*@
+                        <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
+                    </a>
+                    
+                    @*Название услуги.*@
+                    <h4>@entity.Title</h4>
+
+                    @*Краткое описание услуги.*@
+                    <p>@entity.Subtitle</p>
+                </li>
+            }
+        </ul>
+    }
+</div>
