@@ -5,24 +5,24 @@
     <section>
         <h2>Our services</h2>
 
-        @*В ненумерованном списке выводим список наших услуг.*@
+        @*In an unnumbered list, we display a list of our services.*@
         <ul class="small-image-list">
             @foreach (ServiceItem entity in Model)
             {
                 <li>
                     <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
                         
-                        @*Кликабельная титульная картинка нашей услуги.*@
+                        @*Clickable title image of our service.*@
                         <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
                     </a>
 
                     <h4>
-                        @*Название услуги.*@
+                        @*Service name.*@
                         @entity.Title
                     </h4>
 
                     <p>
-                        @*Краткое описание услуги.*@
+                        @*A brief description of the service.*@
                         @entity.Subtitle
                     </p>
                 </li>

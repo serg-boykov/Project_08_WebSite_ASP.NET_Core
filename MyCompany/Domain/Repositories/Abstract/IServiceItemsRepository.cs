@@ -5,33 +5,33 @@ using System.Linq;
 namespace MyCompany.Domain.Repositories.Abstract
 {
     /// <summary>
-    /// Интерфейс для наших услуг.
+    /// Interface for our services.
     /// </summary>
     public interface IServiceItemsRepository
     {
         /// <summary>
-        /// Сделать выборку всех наших услуг.
+        /// Make a selection of all our services.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The all our services.</returns>
         IQueryable<ServiceItem> GetServiceItems();
 
         /// <summary>
-        /// Выбрать услугу по идентификатору.
+        /// Select a service by ID.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The service identifier.</param>
+        /// <returns>The service by ID.</returns>
         ServiceItem GetServiceItemById(Guid id);
 
         /// <summary>
-        /// Сохранить изменения услуги в базу данных.
+        /// Save service changes to the database.
         /// </summary>
-        /// <param name="serviceItem"></param>
+        /// <param name="serviceItem">The company service.</param>
         void SaveServiceItem(ServiceItem serviceItem);
 
         /// <summary>
-        /// Удалить услугу.
+        /// Delete the service by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The service identifier.</param>
         void DeleteServiceItem(Guid id);
     }
 }

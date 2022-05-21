@@ -6,32 +6,32 @@ namespace MyCompany.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// Поле для доступа к нашей доменной модели, к доменным объектам, к нашей БД.
+        /// A field for access to our domain model, to domain objects, to our database.
         /// </summary>
         private readonly DataManager _dataManager;
 
         /// <summary>
-        /// Конструктор класса.
+        /// A class constructor.
         /// </summary>
-        /// <param name="dataManager"></param>
+        /// <param name="dataManager">The domain model.</param>
         public HomeController(DataManager dataManager)
         {
             _dataManager = dataManager;
         }
 
         /// <summary>
-        /// Действие для главной страницы.
+        /// Action for the main page.
         /// </summary>
-        /// <returns>Представление для главной страницы.</returns>
+        /// <returns>The view of the main page.</returns>
         public IActionResult Index()
         {
             return View(_dataManager.TextFields.GetTextFieldByCodeWord("PageIndex"));
         }
 
         /// <summary>
-        /// Действие для страницы контактов.
+        /// Action for the contact page.
         /// </summary>
-        /// <returns>Представление для страницы контактов.</returns>
+        /// <returns>The view of the contact page.</returns>
         public IActionResult Contacts()
         {
             return View(_dataManager.TextFields.GetTextFieldByCodeWord("PageContacts"));

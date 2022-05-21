@@ -1,35 +1,35 @@
 ﻿namespace MyCompany.Service
 {
     /// <summary>
-    /// Класс-обёртка для файла appsettings.json
+    /// Wrapper class for appsettings.json file
     /// </summary>
     public class Config
     {
-        // Каждое свойство этого класса соотвествует
-        // настройкам в файле appsettings.json
+        // Each property of this class corresponds
+        // to the settings in the appsettings.json file
 
         /// <summary>
-        /// Строка подключения к базе данных.
+        /// Database connection string.
         /// </summary>
         public static string ConnectionString { get; set; }
 
         /// <summary>
-        /// Имя компании.
+        /// Name of the company.
         /// </summary>
         public static string CompanyName { get; set; }
 
         /// <summary>
-        /// Телефон компании.
+        /// The company's phone.
         /// </summary>
         public static string CompanyPhone { get; set; }
 
         /// <summary>
-        /// Телефон компании в краткй форме для использования его по ссылке для дозвона.
+        /// Phone number of the company in short form for using it on the link for dialing.
         /// </summary>
         public static string CompanyPhoneShort { get; set; }
 
         /// <summary>
-        /// Почтовый адрес компании.
+        /// Company postal address.
         /// </summary>
         public static string CompanyEmail { get; set; }
     }

@@ -7,8 +7,8 @@ using System.Linq;
 namespace MyCompany.Service
 {
     /// <summary>
-    /// Класс для создания соглашения (Convention),
-    /// реализуя интерфейс IControllerModelConvention.
+    /// A class for creating a convention 
+    /// by implementing the IControllerModelConvention interface.
     /// </summary>
     public class AdminAreaAuthorization : IControllerModelConvention
     {
@@ -22,10 +22,10 @@ namespace MyCompany.Service
         }
 
         /// <summary>
-        /// Для контроллера проверяем его атрибуты.
-        /// Если есть атрибут _area, то добавляем фильтр для данного контроллера
-        /// в AuthorizeFilter(),
-        /// т.е. отправляем пользователя на авторизацию.
+        /// For the controller, we check its attributes. 
+        /// If there is an _area attribute, 
+        /// then we add a filter for this controller to AuthorizeFilter(), 
+        /// i.e. send the user for authorization.
         /// </summary>
         /// <param name="controller"></param>
         public void Apply(ControllerModel controller)

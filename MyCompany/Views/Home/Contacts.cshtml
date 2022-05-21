@@ -6,7 +6,10 @@
 }
 
 <div>
-    @*Вывод содержимого свойства Text в том виде как есть при помощи метода Raw().
-    Этот метод не экранирует и не кодирует служебные символы, в том числе и html-теги.*@
+    @*Displaying the contents of the Text property as is, 
+    without modification, using the Raw() method. 
+    This method does not escape or encode service characters, 
+    including html tags.
+    This is not safe, because the browser can execute the code.*@
     @Html.Raw(Model.Text)
 </div>

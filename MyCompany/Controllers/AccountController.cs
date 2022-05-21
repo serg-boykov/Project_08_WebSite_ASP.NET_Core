@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MyCompany.Controllers
 {
     /// <summary>
-    /// Для данной области на сайте действуют правила авторизации.
+    /// Authorization rules apply to this area on the site.
     /// </summary>
     [Authorize]
     public class AccountController : Controller
@@ -16,11 +16,10 @@ namespace MyCompany.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
 
         /// <summary>
-        /// Через внедрение зависимости через конструктор класса передаём
-        /// userManager и signInManager, чтобы оперировать пользователями в БД.
+        /// Through dependency injection, we pass userManager and signInManager to operate on users in the database.
         /// </summary>
-        /// <param name="userManager"></param>
-        /// <param name="signInManager"></param>
+        /// <param name="userManager">Managing user.</param>
+        /// <param name="signInManager">Managing user sign in.</param>
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
@@ -28,11 +27,11 @@ namespace MyCompany.Controllers
         }
 
         /// <summary>
-        /// Действие Логин на сайте.
-        /// Чтобы залогиниться на сайте нужно быть анонимным пользователем.
+        /// Login action on the site.
+        /// To login on the site you need to be an anonymous user.
         /// </summary>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <param name="returnUrl">The page URL to return after Logining.</param>
+        /// <returns>The view of Login page.</returns>
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
@@ -41,49 +40,53 @@ namespace MyCompany.Controllers
         }
 
         /// <summary>
-        /// Post-версия действия Логин.
+        /// POST version of the Login action.
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
+        /// <param name="model">The Login model.</param>
+        /// <param name="returnUrl">The page URL to return after Logining.</param>
+        /// <returns>The view of the page returnURL.</returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            // Если пользователь ввёл все данные формы правильно.
+            // If the user entered all form data correctly.
             if (ModelState.IsValid)
             {
-                // Пытаемся найти пользователя по тому логину, который указан в модели.
+                // We are trying to find a user by the login specified in the model.
                 IdentityUser user = await _userManager.FindByNameAsync(model.UserName);
 
-                // Если пользователь найден.
+                // If the user is found.
                 if (user != null)
                 {
-                    // Принудительно делаем выход.
+                    // Forced exit.
                     await _signInManager.SignOutAsync();
 
-                    // Пытаемся войти по паролю.
+                    // We are trying to login with a password.
                     Microsoft.AspNetCore.Identity.SignInResult result = 
                         await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
 
-                    // Если действие входа оказалось успешным.
+                    // If the login action was successful.
                     if (result.Succeeded)
                     {
-                        // Перенаправляем пользователя по returnUrl,
-                        // т.е. в ту точку, где он попытался зайти в Admin-ку,
-                        // например, со страницы "Контакты".
-                        // Если значение не было задано, то отправляем на главную страницу.
+                        // We redirect the user by returnUrl,
+                        // i.e. to the point where he tried to enter the Login page,
+                        // for example, from the "Contacts" page.
+                        // If the value was not set, then we send it to the main page.
                         return Redirect(returnUrl ?? "/");
                     }
                 }
 
-                // Если пользователь не найден, то ошибка...
+                // If the user is not found, then the error ...
                 ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неверный логин или пароль");
             }
 
             return View(model);
         }
 
+        /// <summary>
+        /// User Logout.
+        /// </summary>
+        /// <returns>The view of the main page.</returns>
         [Authorize]
         public async Task<IActionResult> Logout()
         {

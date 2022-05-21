@@ -3,24 +3,24 @@
 namespace MyCompany.Domain.Entities
 {
     /// <summary>
-    /// Класс Текстовое поле.
+    /// Class of the Text Field entity.
     /// </summary>
     public class TextField : EntityBase
     {
         /// <summary>
-        /// Обязательное ключевое слово для обращения к текстовому полю.
+        /// Required keyword to access the Text Field entity.
         /// </summary>
         [Required]
         public string CodeWord { get; set; }
 
         /// <summary>
-        /// Переопределение названия страницы.
+        /// Page title override.
         /// </summary>
         [Display(Name = "Название страницы (заголовок)")]
         public override string Title { get; set; } = "Информационная страница";
 
         /// <summary>
-        /// Переопределение содержания страницы.
+        /// Redefining page content.
         /// </summary>
         [Display(Name = "Содержание страницы")]
         public override string Text { get; set; } = "Содержание заполняется администратором";

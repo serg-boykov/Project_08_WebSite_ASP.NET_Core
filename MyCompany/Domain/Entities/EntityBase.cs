@@ -4,65 +4,66 @@ using System.ComponentModel.DataAnnotations;
 namespace MyCompany.Domain.Entities
 {
     /// <summary>
-    /// Абстрактный базовый класс для всех сущностей.
+    /// Abstract basic class for all entities.
     /// </summary>
     public abstract class EntityBase
     {
         /// <summary>
-        /// При создании объекта сразу присваивается значение свойству DateAdded.
+        /// When creating an object, 
+        /// the value of the DateAdeded property is immediately assigned.
         /// </summary>
         protected EntityBase() => DateAdded = DateTime.UtcNow;
 
         /// <summary>
-        /// Обязательный первичный ключ типа Guid.
+        /// Required primary key of type Guid.
         /// </summary>
         [Required]
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Название, например, услуги компании.
+        /// The name, for example, the services of the company.
         /// </summary>
         [Display(Name = "Title (headline)")]
         public virtual string Title { get; set; }
 
         /// <summary>
-        /// Краткое описание, например, услуги компании.
+        /// A brief description of, for example, the services of a company.
         /// </summary>
         [Display(Name = "Short description")]
         public virtual string Subtitle { get; set; }
 
         /// <summary>
-        /// Полное описание, например, услуги компании.
+        /// Full description, for example, the services of the company.
         /// </summary>
         [Display(Name = "Full description")]
         public virtual string Text { get; set; }
 
         /// <summary>
-        /// Картинка, например, для услуги компании.
+        /// The title picture, for example, for the service of the company.
         /// </summary>
         [Display(Name = "Title picture")]
         public virtual string TitleImagePath { get; set; }
 
         /// <summary>
-        /// Значение для метатега Title.
+        /// The value for the Title meta tag.
         /// </summary>
         [Display(Name = "SEO metateg Title")]
         public string MetaTitle { get; set; }
 
         /// <summary>
-        /// Значение для метатега Description.
+        /// The value for the Description meta tag.
         /// </summary>
         [Display(Name = "SEO metateg Description")]
         public string MetaDescription { get; set; }
 
         /// <summary>
-        /// Значение для метатега Keywords.
+        /// The value for the Keywords meta tag.
         /// </summary>
         [Display(Name = "SEO metateg Keywords")]
         public string MetaKeywords { get; set; }
 
         /// <summary>
-        /// Дата создания сущности.
+        /// The date of creating entity.
         /// </summary>
         [DataType(DataType.Time)]
         public DateTime DateAdded { get; set; }

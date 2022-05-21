@@ -7,23 +7,23 @@ namespace MyCompany.Models.ViewComponents
     public class SidebarViewComponent : ViewComponent
     {
         /// <summary>
-        /// Поле для доступа к нашей доменной модели, к доменным объектам, к нашей БД.
+        /// A field for access to our domain model, to domain objects, to our database.
         /// </summary>
         private readonly DataManager _dataManager;
 
         /// <summary>
-        /// Конструктор класса.
+        /// A class constructor.
         /// </summary>
-        /// <param name="dataManager"></param>
+        /// <param name="dataManager">The domain model.</param>
         public SidebarViewComponent(DataManager dataManager)
         {
             _dataManager = dataManager;
         }
 
         /// <summary>
-        /// Асинхронная задача, возвращающая представление списка всех услуг по имени "Default".
+        /// The asynchronous task that returns the view of the list of all services named "Default".
         /// </summary>
-        /// <returns>Представление списка всех услуг.</returns>
+        /// <returns>The view of the list of all services.</returns>
         public Task<IViewComponentResult> InvokeAsync()
         {
             return Task.FromResult((IViewComponentResult)View("Default", _dataManager.ServiceItems.GetServiceItems()));

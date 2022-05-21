@@ -3,8 +3,7 @@
 namespace MyCompany.Domain
 {
     /// <summary>
-    /// Класс-помощник для управления текстовыми полями и услугами,
-    /// а также операциями над ними.
+    /// Helper class for managing text fields and services, as well as operations on them.
     /// </summary>
     public class DataManager
     {

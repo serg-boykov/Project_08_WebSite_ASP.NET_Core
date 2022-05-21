@@ -7,27 +7,27 @@ using Microsoft.EntityFrameworkCore;
 namespace MyCompany.Domain.Repositories.EntityFramework
 {
     /// <summary>
-    /// Класс реализации EF интерфейса ITextFieldRepository
-    /// для текстовых полей.
+    /// The EF implementation class 
+    /// of the ITextFieldRepository interface for text fields.
     /// </summary>
     public class EFTextFieldsRepository : ITextFieldsRepository
     {
         /// <summary>
-        /// Поле для связи объектов нашего сайта с базой данных.
+        /// A field for linking the objects of our site with the database.
         /// </summary>
         private readonly AppDbContext _context;
 
         /// <summary>
-        /// Внедрение зависимости связи с базой данных через конструктор.
+        /// Dependency injection for linking with the database through the constructor.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The database context.</param>
         public EFTextFieldsRepository(AppDbContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Выбираем все записи из таблицы TextField.
+        /// Select all records from the TextField table.
         /// </summary>
         /// <returns></returns>
         public IQueryable<TextField> GetTextFields()
@@ -36,29 +36,29 @@ namespace MyCompany.Domain.Repositories.EntityFramework
         }
 
         /// <summary>
-        /// Выбираем одну запись по идентификатору.
+        /// Select one record by ID.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The record identifier.</param>
+        /// <returns>The record in the database.</returns>
         public TextField GetTextFieldById(Guid id)
         {
             return _context.TextFields.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
-        /// Выбираем одну запись по ключевому слову codeWord.
+        /// We select one record by the keyword codeWord.
         /// </summary>
-        /// <param name="codeWord"></param>
-        /// <returns></returns>
+        /// <param name="codeWord">The keyword codeWord.</param>
+        /// <returns>The record in the database.</returns>
         public TextField GetTextFieldByCodeWord(string codeWord)
         {
             return _context.TextFields.FirstOrDefault(x =>x.CodeWord == codeWord);
         }
 
         /// <summary>
-        /// Сохраняем изменения в базе данных после добавления записи или её изменения.
+        /// We save changes in the database after adding a record or changing it.
         /// </summary>
-        /// <param name="textField"></param>
+        /// <param name="textField">The record in the database.</param>
         public void SaveTextField(TextField textField)
         {
             if (textField.Id == default)
@@ -74,9 +74,9 @@ namespace MyCompany.Domain.Repositories.EntityFramework
         }
 
         /// <summary>
-        /// Удаляем запись по идентификатору.
+        /// Delete record by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The record identifier.</param>
         public void DeleteTextField(Guid id)
         {
             _context.TextFields.Remove(new TextField() { Id = id });

@@ -9,51 +9,53 @@ namespace MyCompany.Areas.Admin.Controllers
     public class TextFieldsController : Controller
     {
         /// <summary>
-        /// Поле для доступа к нашей доменной модели, к доменным объектам, к нашей БД.
+        /// A field for access to our domain model, to domain objects, to our database.
         /// </summary>
         private readonly DataManager _dataManager;
 
         /// <summary>
-        /// Конструктор класса.
+        /// A class constructor.
         /// </summary>
-        /// <param name="dataManager"></param>
+        /// <param name="dataManager">The domain model.</param>
         public TextFieldsController(DataManager dataManager)
         {
             _dataManager = dataManager;
         }
 
         /// <summary>
-        /// Редактирование страницы по кодовому слову.
+        /// Page editing by code word.
         /// </summary>
-        /// <param name="codeWord"></param>
-        /// <returns></returns>
+        /// <param name="codeWord">The code word of the page.</param>
+        /// <returns>The view of the text field.</returns>
         public IActionResult Edit(string codeWord)
         {
-            // Получение текстового поля по кодовому слову.
+            // Getting the textField entity according to the code word.
             var entity = _dataManager.TextFields.GetTextFieldByCodeWord(codeWord);
-            
-            // Передаём текстовое поле в представление.
+
+            // The view of the textField entity.
             return View(entity);
         }
 
         /// <summary>
-        /// Действие после редактирования страницы и сохранение формы.
+        /// Action after editing the page and saving the form.
         /// </summary>
-        /// <param name="model">Модель, переданная с html-формы.</param>
-        /// <returns></returns>
+        /// <param name="model">The model passed from html-form.</param>
+        /// <returns>The view of the service list.</returns>
         [HttpPost]
         public IActionResult Edit(TextField model)
         {
-            // Если модель без ошибок.
+            // If the model is without errors.
             if (ModelState.IsValid)
             {
-                // Сохраняем модель в БД.
+                // We save the model in the database.
                 _dataManager.TextFields.SaveTextField(model);
 
-                // Перенаправляем пользователя на HomeController c действием "Index" в "Admin"-area.
+                // We redirect the user to the HomeController with the "Index" action in the "Admin"-area:
+                // The view of the service list.
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
             }
             
+            // The view of the model page.
             return View(model);
         }
     }

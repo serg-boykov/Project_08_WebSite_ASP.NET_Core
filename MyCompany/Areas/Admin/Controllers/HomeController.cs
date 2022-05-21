@@ -7,19 +7,23 @@ namespace MyCompany.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// Поле для доступа к нашей доменной модели, к доменным объектам, к нашей БД.
+        /// A field for access to our domain model, to domain objects, to our database.
         /// </summary>
         private readonly DataManager _dataManager;
 
         /// <summary>
-        /// Конструктор класса.
+        /// A class constructor.
         /// </summary>
-        /// <param name="dataManager"></param>
+        /// <param name="dataManager">The domain model.</param>
         public HomeController(DataManager dataManager)
         {
             _dataManager = dataManager;
         }
 
+        /// <summary>
+        /// Action to get the service list view.
+        /// </summary>
+        /// <returns>The view of the service list.</returns>
         public IActionResult Index()
         {
             return View(_dataManager.ServiceItems.GetServiceItems());

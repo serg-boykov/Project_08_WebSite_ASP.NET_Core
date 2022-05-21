@@ -10,12 +10,11 @@
     <h2>@strTitle</h2>
     <div>
 
-        @*Обычная html-форма, размеченного tagHelpers.
-          Отправляемся на контроллер "ServiceItems" с действием "Edit", используя метод Post.
-        *@
+        @*The usual HTML form marked TaghelPers.
+        We go to the "Serviceitems" controller with the action "Edit" using the Post method.*@
         <form asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" method="post" enctype="multipart/form-data">
             
-            @*Скрытые вводные данные.*@
+            @*Hidden input data.*@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="DateAdded" />
             <input type="hidden" asp-for="TitleImagePath" />
@@ -43,12 +42,12 @@
             <div class="div-box">
                 <label asp-for="TitleImagePath"></label>
 
-                @*name="titleImageFile" должен совпадать с именем на сервере.*@
+                @*name="titleImageFile" must match the name on the server.*@
                 <input type="file" name="titleImageFile" id="titleImageFile" />
                 
                 <div>
-                    @*При повторном обращении к этой записи пытаемся найти картинку и подгрузить.
-                    Путь к картинке сохраняется в свойстве модели TitleImagePath.*@
+                    @*When you access this record again, we try to find the picture and upload it.
+                    The path to the image is stored in the model's TitleImagePath property.*@
                     <img class="img-block" src="~/images/@Model.TitleImagePath" />
                 </div>
             </div>
@@ -80,7 +79,7 @@
 
 
 <script>
-    //При загрузке страницы ищем и заменяем текстовое поле для свойства Text
+    // When loading the page, look for and replace the text field for the Text property.
     window.onload = function() {
         
         var newCKEdit = CKEDITOR.replace('@Html.IdFor(x => x.Text)');

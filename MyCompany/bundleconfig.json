@@ -2,7 +2,7 @@
   {
     "outputFileName": "wwwroot/js/scripts.js",
     "inputFiles": [
-      // jquery должен подключаться первым, чтобы сразу был доступен
+      // jquery must be included first to be immediately available.
       "wwwroot/js/jquery.min.js",
       "wwwroot/js/browser.min.js",
       "wwwroot/js/breakpoints.min.js",

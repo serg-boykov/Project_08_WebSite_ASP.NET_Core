@@ -1,7 +1,7 @@
-﻿@*В качестве модели одна услуга.*@
+﻿@*As a model, one service.*@
 @model ServiceItem
 @{
-    //Заполняем все мега-теги из Model
+    //Filling in all mega tags from Model.
     ViewBag.Title = Model.MetaTitle;
     ViewBag.Description = Model.MetaDescription;
     ViewBag.Keywords = Model.MetaKeywords;
@@ -9,24 +9,26 @@
 
 <div>
     <h2>
-        @*Название услуги.*@
+        @*Service name.*@
         @Model.Title
     </h2>
 
     <h2>
-        @*Краткое описание услуги.*@
+        @*A brief description of the service.*@
         @Model.Subtitle
     </h2>
 
     <div>
-        @*Титульная картинка услуги.*@
+        @*Title picture of the service.*@
         <img class="img-block" src="~/images/@Model.TitleImagePath" />
     </div>
 </div>
 
 <div>
-    @*Вывод содержимого свойства Text в том виде как есть при помощи метода Raw().
-    Этот метод не экранирует и не кодирует служебные символы, в том числе и html-теги.
-    Это не безопасно, т.к. браузер может выполнить код.*@
+    @*Displaying the contents of the Text property as is, 
+    without modification, using the Raw() method. 
+    This method does not escape or encode service characters, 
+    including html tags.
+    This is not safe, because the browser can execute the code.*@
     @Html.Raw(Model.Text)
 </div>

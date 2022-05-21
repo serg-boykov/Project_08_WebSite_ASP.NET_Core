@@ -7,31 +7,31 @@ using System;
 namespace MyCompany.Domain
 {
     /// <summary>
-    /// Класс для связи объектов нашего сайта с базой данных.
+    /// A class for linking the objects of our site with the database.
     /// </summary>
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         /// <summary>
-        /// Связь класса TextField с базой данных (таблица TextFields).
+        /// For linking of the TextField class with the database (table TextFields).
         /// </summary>
         public DbSet<TextField> TextFields { get; set; }
 
         /// <summary>
-        /// Связь класса ServiceItem с базой данных (таблица ServiceItems).
+        /// For linking of the ServiceItem class with the database (ServiceItems table).
         /// </summary>
         public DbSet<ServiceItem> ServiceItems { get; set; }
 
         /// <summary>
-        /// Заполняем базу данных значениями по умолчанию.
+        /// Filling the database with default values.
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Создаем роль для пользователя как Администратор.
+            // We create a role for the user as an administrator.
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Id = "8af10569-b018-4fe6-a380-7d6a14c70b74",
@@ -39,7 +39,7 @@ namespace MyCompany.Domain
                 NormalizedName = "ADMIN"
             });
 
-            // Определяем пользователя-администратора.
+            // Define an administrator-user.
             modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
             {
                 Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
@@ -52,17 +52,16 @@ namespace MyCompany.Domain
                 SecurityStamp = string.Empty
             });
 
-            // Во вспомогательной таблице связываем, что нашему пользователю принадлежит роль Администратора.
+            // In the auxiliary table, we link that our user has the Administrator role.
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = "8af10569-b018-4fe6-a380-7d6a14c70b74",
                 UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8"
             });
 
-            // Далее идут текстовые поля для того, чтобы изменять содержание страниц на сайте
-            // и прописать SEO метатеги.
+            // The text fields in order to change the content of the pages on the site and register SEO meta tags.
 
-            // Создаём объект TextField в базе данных как PageIndex.
+            // Create a TextField object in the database as a PageIndex.
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
                 Id = new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"),
@@ -70,7 +69,7 @@ namespace MyCompany.Domain
                 Title = "Main"
             });
 
-            // Создаём объект TextField в базе данных как PageServices.
+            // Create a TextField object in the database as PageServices.
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
                 Id = new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"),
@@ -78,7 +77,7 @@ namespace MyCompany.Domain
                 Title = "Our services"
             });
 
-            // Создаём объект TextField в базе данных как PageContacts.
+            // Create a TextField object in the database as PageContacts.
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
                 Id = new Guid("4aa76a4c-c59d-409a-84c1-06e6487a137a"),

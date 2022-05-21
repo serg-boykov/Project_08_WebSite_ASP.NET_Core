@@ -7,27 +7,27 @@ using System.Linq;
 namespace MyCompany.Domain.Repositories.EntityFramework
 {
     /// <summary>
-    /// Класс реализации EF интерфейса IServiceItemsRepository
-    /// для услуг.
+    /// EF implementation class 
+    /// of the IServiceItemsRepository interface for services.
     /// </summary>
     public class EFServiceItemsRepository : IServiceItemsRepository
     {
         /// <summary>
-        /// Поле для связи объектов нашего сайта с базой данных.
+        /// A field for linking the objects of our site with the database.
         /// </summary>
         private readonly AppDbContext _context;
 
         /// <summary>
-        /// Внедрение зависимости связи с базой данных через конструктор.
+        /// Dependency injection for linking with the database through the constructor.
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name="context">The database context.</param>
         public EFServiceItemsRepository(AppDbContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Выбираем все записи из таблицы ServiceItem.
+        /// Select all records from the ServiceItem table.
         /// </summary>
         /// <returns></returns>
         public IQueryable<ServiceItem> GetServiceItems()
@@ -36,19 +36,19 @@ namespace MyCompany.Domain.Repositories.EntityFramework
         }
 
         /// <summary>
-        /// Выбираем одну запись по идентификатору.
+        /// Select one record by ID.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The record identifier.</param>
+        /// <returns>The record in the database.</returns>
         public ServiceItem GetServiceItemById(Guid id)
         {
             return _context.ServiceItems.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
-        /// Сохраняем изменения в базе данных после добавления записи или её изменения.
+        /// We save changes in the database after adding a record or changing it.
         /// </summary>
-        /// <param name="serviceItem"></param>
+        /// <param name="serviceItem">The record in the database.</param>
         public void SaveServiceItem(ServiceItem serviceItem)
         {
             if (serviceItem.Id == default)
@@ -64,9 +64,9 @@ namespace MyCompany.Domain.Repositories.EntityFramework
         }
 
         /// <summary>
-        /// Удаляем запись по идентификатору.
+        /// Delete record by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The record identifier.</param>
         public void DeleteServiceItem(Guid id)
         {
             _context.ServiceItems.Remove(new ServiceItem() { Id = id });

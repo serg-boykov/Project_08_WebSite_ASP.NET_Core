@@ -1,38 +1,38 @@
-﻿@*В качестве модели коллекция услуг.*@
+﻿@*As a model, a collection of services.*@
 @model IQueryable<ServiceItem>
 @{
-    //Извлекаем TextField из ViewBag
+    // Extract TextField from ViewBag.
     TextField textField = ViewBag.TextField;
 
-    //Заполняем все мега-теги
+    // Fill in all mega tags.
     ViewBag.Title = textField.MetaTitle;
     ViewBag.Description = textField.MetaDescription;
     ViewBag.Keywords = textField.MetaKeywords;
 }
 
 <div>
-    @*Если модель содержит какие-то данные, в данном случае список услуг*@
+    @*If the model contains some data, in this case a list of services.*@
     @if (Model.Any())
     {
-        @*Используем стиль из этого шаблона.*@
+        @*Using the style from this template.*@
         <ul class="big-image-list">
             
             @foreach (ServiceItem entity in Model)
             {
-                @*Для каждой услуги делаем отдельный <li> элемент*@
+                @*For each service we make a separate <li> element.*@
                 <li>
                     
-                    @*Ссылка на конкретную услугу.*@
+                    @*Link to a specific service.*@
                     <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
                         
-                        @*Кликабельная титульная картинка.*@
+                        @*Clickable title image.*@
                         <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
                     </a>
                     
-                    @*Название услуги.*@
+                    @*Service name.*@
                     <h4>@entity.Title</h4>
 
-                    @*Краткое описание услуги.*@
+                    @*A brief description of the service.*@
                     <p>@entity.Subtitle</p>
                 </li>
             }

@@ -7,39 +7,38 @@ namespace MyCompany.Controllers
     public class ServicesController : Controller
     {
         /// <summary>
-        /// Поле для доступа к нашей доменной модели, к доменным объектам, к нашей БД.
+        /// A field for access to our domain model, to domain objects, to our database.
         /// </summary>
         private readonly DataManager _dataManager;
 
         /// <summary>
-        /// Конструктор класса.
+        /// A class constructor.
         /// </summary>
-        /// <param name="dataManager"></param>
+        /// <param name="dataManager">The domain model.</param>
         public ServicesController(DataManager dataManager)
         {
             _dataManager = dataManager;
         }
 
         /// <summary>
-        /// Действие для страницы Наши Услуги.
+        /// Action for the service page.
         /// </summary>
-        /// <param name="id">Идентификатор услуги.</param>
-        /// <returns>Представление для страницы услуг.</returns>
+        /// <param name="id">The service identifier.</param>
+        /// <returns>The view of the service page.</returns>
         public IActionResult Index(Guid id)
         {
-            // Если передаётся конкретный идентификатор услуги,
-            // то представление этой услуги.
+            // The view of the service by ID.
             if (id != default)
             {
                 return View("Show", _dataManager.ServiceItems.GetServiceItemById(id));
             }
 
-            // Если идентификатор услуги НЕ передаётся (пустой), то комбинированная модель.
+            // If there is no identifier, then a combined model.
 
-            // Через ViewBag передаётся текстовое поле PageServices.
+            // Via Viewbag transfers the PageServices text field.
             ViewBag.TextField = _dataManager.TextFields.GetTextFieldByCodeWord("PageServices");
 
-            // Полный перечень услуг.
+            // Full list of services.
             return View(_dataManager.ServiceItems.GetServiceItems());
         }
     }

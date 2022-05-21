@@ -4,7 +4,7 @@
     ViewBag.Title = strTitle;
 }
 
-@*Визуальный редактор CKEditor*@
+@*Visual editor Ckeditor*@
 <script src="~/js/ckeditor/ckeditor.js"></script>
 
 <div>
@@ -12,12 +12,11 @@
 
     <div>
 
-        @*Обычная html-форма, размеченного tagHelpers.
-          Отправляемся на контроллер "TextFields" с действием "Edit", используя метод Post.
-        *@
+        @*The usual HTML form marked TaghelPers.
+        We go to the "TextFields" controller with the action "Edit" using the Post method.*@
         <form asp-area="Admin" asp-controller="TextFields" asp-action="Edit" method="post" enctype="multipart/form-data">
             
-            @*Скрытые вводные данные.*@
+            @*Hidden input data.*@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="DateAdded" />
             <input type="hidden" asp-for="CodeWord" />
@@ -61,7 +60,7 @@
 </div>
 
 <script>
-    //При загрузке страницы ищем и заменяем текстовое поле для свойства Text
+    // When loading the page, look for and replace the text field for the Text property.
     window.onload = function() {
         
         var newCKEdit = CKEDITOR.replace('@Html.IdFor(x => x.Text)');
