@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyCompany.Domain;
-using MyCompany.Domain.Repositories.Abstract;
-using MyCompany.Domain.Repositories.EntityFramework;
 using MyCompany.Service;
 
 namespace MyCompany
@@ -24,39 +21,19 @@ namespace MyCompany
             // Binding the Config class with info from appsettings.json
             Configuration.Bind("Project", new Config());
 
-
             // We connect the necessary functionality of the application as services.
-            // Associate an interface with an implementation of that interface.
-            // At any time, we can replace it with another implementation
-            // (then there will be another DbContext, another Provider).
-            // AddTransient - created on request.
-            services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
-            services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
-            services.AddTransient<DataManager>();
+
+            // Management of the repository.
+            services.AddDataManager();
 
             // Connecting the database context.
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
             // Setting up the Identity system.
-            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
-            {
-                opts.User.RequireUniqueEmail = true; // Email confirmation.
-                opts.Password.RequiredLength = 6;
-                opts.Password.RequireNonAlphanumeric = false;
-                opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity();
 
             // Set up an authentication cookie.
-            services.ConfigureApplicationCookie(option =>
-            {
-                option.Cookie.Name = "myCompanyAuth";
-                option.Cookie.HttpOnly = true; // not available on the client side.
-                option.LoginPath = "/account/login";
-                option.AccessDeniedPath = "/account/accessdenied";
-                option.SlidingExpiration = true;
-            });
+            services.AddConfigureAppCookie();
 
             // Set up an authorization policy for the Admin area.
             services.AddAuthorization(x =>
