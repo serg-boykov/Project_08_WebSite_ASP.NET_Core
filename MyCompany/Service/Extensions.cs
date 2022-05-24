@@ -68,5 +68,14 @@ namespace MyCompany.Service
             services.AddTransient<DataManager>();
 
         }
+
+        /// <summary>
+        /// The service of the Login action.
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddLoginService(this IServiceCollection services)
+        {
+            services.AddTransient<ILoginService, LoginService>();
+        }
     }
 }

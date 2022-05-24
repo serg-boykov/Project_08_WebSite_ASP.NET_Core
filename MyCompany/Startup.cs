@@ -42,6 +42,8 @@ namespace MyCompany
                 x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
             });
 
+            services.AddLoginService();
+
             // Add Services for Controllers and Views (MVC)
             services.AddControllersWithViews(x =>
                 {
@@ -52,6 +54,7 @@ namespace MyCompany
                 // to be sure that nothing broke during the upgrade.
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0)
                 .AddSessionStateTempDataProvider();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
